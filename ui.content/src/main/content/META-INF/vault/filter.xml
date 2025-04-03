@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/hdfclife" mode="merge"/>
+    <filter root="/content/hdfclife" mode="merge"/>
+    <filter root="/content/dam/hdfclife" mode="merge">
+        <exclude pattern="/content/dam/hdfclife(/.*)?"/>
+        <include pattern="/content/dam/hdfclife/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/hdfclife/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/hdfclife" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-themes/hdfclife" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-fdm/hdfclife" mode="merge"/>
+    <filter root="/content/dam/hdfclife/sample_logo.png" mode="merge"/>
+    <filter root="/content/dam/hdfclife/sample_terms.png" mode="merge"/>
+    <filter root="/content/dam/hdfclife/wknd_logo.png" mode="merge"/>
+    <filter root="/content/dam/hdfclife/af_model_sample.json" mode="merge"/>
+</workspaceFilter>

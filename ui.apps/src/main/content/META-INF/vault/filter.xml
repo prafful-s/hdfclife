@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/hdfclife/clientlibs"/>
+    <filter root="/apps/hdfclife/components"/>
+    <filter root="/apps/hdfclife/i18n"/>
+    <filter root="/apps/fd/af/theme-clientlibs" mode="merge"/>
+
+</workspaceFilter>

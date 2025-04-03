@@ -1,0 +1,7 @@
+{
+    "scripts": [
+        "create path (sling:OrderedFolder) /content/dam/hdfclife",
+        "create path (nt:unstructured) /content/dam/hdfclife/jcr:content",
+        "set properties on /content/dam/hdfclife/jcr:content\n  set cq:conf{String} to /conf/hdfclife\n  set jcr:title{String} to \"HDFC Life\"\nend"
+    ]
+}

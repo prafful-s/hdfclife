@@ -145,7 +145,7 @@
                         <artifactId>core-forms-components-core</artifactId>
                         <target>/apps/hdfclife-vendor-packages/application/install</target>
                       </embedded>
-                                                                  <embedded>
+                        <embedded>
                         <groupId>com.adobe.aem</groupId>
                         <artifactId>core-forms-components-examples-apps</artifactId>
                         <type>zip</type>
@@ -157,7 +157,13 @@
                         <type>zip</type>
                         <target>/apps/hdfclife-vendor-packages/application/install</target>
                       </embedded>
-                                          </embeddeds>
+                      <embedded>
+                        <groupId>com.adobe.aem.guides</groupId>
+						<artifactId>aem-guides-wknd.all</artifactId>
+                        <type>zip</type>
+                        <target>/apps/hdfclife-vendor-packages/content/install</target>
+                      </embedded>
+                    </embeddeds>
                 </configuration>
             </plugin>
             <plugin>
@@ -326,6 +332,18 @@
         <dependency>
             <groupId>com.adobe.cq</groupId>
             <artifactId>core.wcm.components.examples.ui.content</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+			<groupId>com.adobe.aem.guides</groupId>
+			<artifactId>aem-guides-wknd.all</artifactId>
+			<type>zip</type>
+			<version>2.1.4</version>
+		</dependency>
+        <dependency>
+            <groupId>com.adobe.aem.guides</groupId>
+            <artifactId>aem-guides-wknd.ui.content.sample</artifactId>
+            <version>2.1.4</version>
             <type>zip</type>
         </dependency>
     </dependencies>

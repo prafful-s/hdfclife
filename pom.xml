@@ -48,11 +48,10 @@
         <vault.user>admin</vault.user>
         <vault.password>admin</vault.password>
         <frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
-        <core.wcm.components.version>2.26.0</core.wcm.components.version>
-
-        <core.forms.components.version>1.1.60</core.forms.components.version>
-        <core.forms.components.af.version>1.1.60</core.forms.components.af.version>
-        <aem.forms.sdk.api>6.1.152</aem.forms.sdk.api>
+        <core.wcm.components.version>2.24.6</core.wcm.components.version>
+        <core.forms.components.version>1.1.66</core.forms.components.version>
+        <core.forms.components.af.version>1.1.66</core.forms.components.af.version>
+        <aem.forms.sdk.api>6.0.1328</aem.forms.sdk.api>
         <bnd.version>6.4.0</bnd.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -748,12 +747,12 @@ Bundle-DocURL:
                 <type>zip</type>
             </dependency>
             <!-- AEM Forms Dependencies -->
-                        <dependency>
+            <dependency>
                 <groupId>com.adobe.aemfd</groupId>
                 <artifactId>aemfd-client-sdk</artifactId>
                 <version>${aem.forms.sdk.api}</version>
             </dependency>
-                        <dependency>
+            <dependency>
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>core-forms-components-apps</artifactId>
                 <type>zip</type>
@@ -775,8 +774,7 @@ Bundle-DocURL:
                 <artifactId>core-forms-components-af-core</artifactId>
                 <version>${core.forms.components.af.version}</version>
             </dependency>
-
-                        <dependency>
+            <dependency>
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>core-forms-components-examples-apps</artifactId>
                 <type>zip</type>
@@ -788,8 +786,6 @@ Bundle-DocURL:
                 <type>zip</type>
                 <version>${core.forms.components.version}</version>
             </dependency>
-            
-
             <!-- Testing -->
             <dependency>
                 <groupId>org.junit</groupId>

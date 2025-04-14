@@ -43,7 +43,11 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-Import-Package: javax.annotation;version=0.0.0,*
+Import-Package: javax.annotation;version=0.0.0,
+                java.sql;resolution:=optional,
+                javax.sql;resolution:=optional,
+                *
+DynamicImport-Package: *
                                 ]]></bnd>
                         </configuration>
                     </execution>
@@ -88,10 +92,12 @@ Import-Package: javax.annotation;version=0.0.0,*
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>
                             javax.annotation;version=0.0.0,
-                            javax.sql;version=0.0.0,
-                            java.sql;version=0.0.0,
+                            java.sql;resolution:=optional,
+                            javax.sql;resolution:=optional,
+                            com.adobe.fd.fp.service;resolution:=required;version="[1.0.0,10.0.0)",
                             *
                         </Import-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
                         <Sling-Model-Packages>
                             com.hdfclife.core
                         </Sling-Model-Packages>

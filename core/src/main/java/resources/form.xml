@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<afData xsi:noNamespaceSchemaLocation="schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <afBoundData>
+    <customerApplication>
+      <applicantDetail>
+        <contactPerson>John Doe</contactPerson>
+        <contactPersonEmail>john.doe@example.com</contactPersonEmail>
+        <contactPersonCompany>ABC Corp</contactPersonCompany>
+        <contactPersonCity>New York</contactPersonCity>
+        <contactPersonMobile>+1234567890</contactPersonMobile>
+      </applicantDetail>
+      <bankDetail>
+        <iban>DE89370400440532013000</iban>
+        <swiftCode>DEUTDEFF</swiftCode>
+      </bankDetail>
+      <signerDetail>
+        <signerName>John Doe</signerName>
+      </signerDetail>
+    </customerApplication>
+  </afBoundData>
+</afData>

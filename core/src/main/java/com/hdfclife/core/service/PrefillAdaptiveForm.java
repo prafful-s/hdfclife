@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Map;
 
-@Component
+@Component(service = PrefillAdaptiveForm.class)
 public class PrefillAdaptiveForm implements DataXMLProvider {
     private static final Logger log = LoggerFactory.getLogger(PrefillAdaptiveForm.class);
 
@@ -40,7 +40,7 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
 
     @Override
     public InputStream getDataXMLForDataRef(DataXMLOptions dataXmlOptions) throws FormsException {
-      log.info("HDFC Life Prefill service method called");
+        log.info("HDFC Life Prefill service method called");
         Resource aemFormContainer = dataXmlOptions.getFormResource();
         ResourceResolver resolver = aemFormContainer.getResourceResolver();
         Session session = (Session) resolver.adaptTo(Session.class);
@@ -53,37 +53,39 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
             // For testing, you can hardcode a mobile number or get it from user properties
             String mobileNumber = "9876543210"; // Replace with actual mobile number retrieval logic
             Map<String, String> userData = userDataService.getUserData(mobileNumber);
+            log.info("Retrieved user data: {}", userData);
 
-            // Create JSON structure
+            // Create JSON structure directly from the userData map
+            // The map already contains the correct structure from the database
             ObjectNode rootNode = objectMapper.createObjectNode();
-            ObjectNode afDataNode = objectMapper.createObjectNode();
-            ObjectNode afBoundDataNode = objectMapper.createObjectNode();
-            ObjectNode customerApplicationNode = objectMapper.createObjectNode();
-            
-            // Create applicant details
-            ObjectNode applicantDetailNode = objectMapper.createObjectNode();
-            applicantDetailNode.put("contactPerson", userData.getOrDefault("givenName", ""));
-            applicantDetailNode.put("contactPersonEmail", userData.getOrDefault("email", ""));
-            applicantDetailNode.put("contactPersonCompany", userData.getOrDefault("company", ""));
-            applicantDetailNode.put("contactPersonCity", userData.getOrDefault("city", ""));
-            applicantDetailNode.put("contactPersonMobile", userData.getOrDefault("mobile", ""));
-
-            // Create bank details
-            ObjectNode bankDetailNode = objectMapper.createObjectNode();
-            bankDetailNode.put("iban", userData.getOrDefault("iban", ""));
-            bankDetailNode.put("swiftCode", userData.getOrDefault("swiftCode", ""));
-
-            // Create signer details
-            ObjectNode signerDetailNode = objectMapper.createObjectNode();
-            signerDetailNode.put("signerName", userData.getOrDefault("givenName", ""));
-
-            // Build the complete JSON structure
-            customerApplicationNode.set("applicantDetail", applicantDetailNode);
-            customerApplicationNode.set("bankDetail", bankDetailNode);
-            customerApplicationNode.set("signerDetail", signerDetailNode);
-            afBoundDataNode.set("customerApplication", customerApplicationNode);
-            afDataNode.set("afBoundData", afBoundDataNode);
-            rootNode.set("afData", afDataNode);
+            userData.forEach((key, value) -> {
+                if (value != null) {
+                    try {
+                        switch (key) {
+                            case "nriCheck":
+                            case "tobaccoCheck":
+                            case "countryCode":
+                            case "medicalHistoryOthers":
+                            case "medicalHistoryHeart":
+                                rootNode.put(key, Integer.parseInt(value));
+                                break;
+                            case "mobileNumber":
+                                rootNode.put(key, Long.parseLong(value));
+                                break;
+                            case "annualIncome":
+                            case "existingLifeCover":
+                            case "height":
+                            case "weight":
+                                rootNode.put(key, Double.parseDouble(value));
+                                break;
+                            default:
+                                rootNode.put(key, value);
+                        }
+                    } catch (NumberFormatException e) {
+                        rootNode.put(key, value);
+                    }
+                }
+            });
 
             // Convert to JSON string and create input stream
             String jsonString = objectMapper.writeValueAsString(rootNode);

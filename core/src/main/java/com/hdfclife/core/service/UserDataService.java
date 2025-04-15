@@ -22,8 +22,8 @@ public class UserDataService {
     @Reference
     private DatabaseConnectionService dbService;
 
-    public Map<String, String> getUserData(String mobileNumber) {
-        Map<String, String> userData = new HashMap<>();
+    public String getUserData(String mobileNumber) {
+        String userData = "";
         String query = "SELECT userProfileJson FROM user_profile WHERE mobileNumber = ?";
 
         try (Connection conn = dbService.getConnection();
@@ -34,15 +34,15 @@ public class UserDataService {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String jsonStr = rs.getString("userProfileJson");
-                if (jsonStr != null && !jsonStr.isEmpty()) {
-                    // Convert JSON string to Map
-                    ObjectNode jsonNode = (ObjectNode) objectMapper.readTree(jsonStr);
-                    jsonNode.fields().forEachRemaining(entry -> 
-                        userData.put(entry.getKey(), entry.getValue().asText(""))
-                    );
-                    log.debug("Found user data for mobile number: {}", mobileNumber);
-                }
+                userData = rs.getString("userProfileJson");
+                // if (jsonStr != null && !jsonStr.isEmpty()) {
+                //     // Convert JSON string to Map
+                //     ObjectNode jsonNode = (ObjectNode) objectMapper.readTree(jsonStr);
+                //     jsonNode.fields().forEachRemaining(entry -> 
+                //         userData.put(entry.getKey(), entry.getValue().asText(""))
+                //     );
+                //     log.debug("Found user data for mobile number: {}", mobileNumber);
+                // }
             } else {
                 log.warn("No user found for mobile number: {}", mobileNumber);
             }

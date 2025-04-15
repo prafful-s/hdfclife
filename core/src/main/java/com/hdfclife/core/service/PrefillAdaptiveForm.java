@@ -41,16 +41,7 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
     @Override
     public InputStream getDataXMLForDataRef(DataXMLOptions dataXmlOptions) throws FormsException {
         log.info("HDFC Life Prefill service method called");
-        Resource aemFormContainer = dataXmlOptions.getFormResource();
-        ResourceResolver resolver = aemFormContainer.getResourceResolver();
-        Session session = (Session) resolver.adaptTo(Session.class);
         try {
-            UserManager um = ((JackrabbitSession) session).getUserManager();
-            Authorizable loggedinUser = um.getAuthorizable(session.getUserID());
-            log.info("The path of the user is " + loggedinUser.getPath());
-
-            // Get user data from MySQL database using mobile number
-            // For testing, you can hardcode a mobile number or get it from user properties
             String mobileNumber = "9876543210"; // Replace with actual mobile number retrieval logic
             Map<String, String> userData = userDataService.getUserData(mobileNumber);
             log.info("Retrieved user data: {}", userData);

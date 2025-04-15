@@ -43,6 +43,7 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
 
   @Override
   public InputStream getDataXMLForDataRef(DataXMLOptions dataXmlOptions) throws FormsException {
+    log.info("HDFC Life Prefill service method called");
     InputStream xmlDataStream = null;
     Resource aemFormContainer = dataXmlOptions.getFormResource();
     ResourceResolver resolver = aemFormContainer.getResourceResolver();

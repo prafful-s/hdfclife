@@ -29,6 +29,7 @@ public class PrefillAdaptiveFormServlet extends SlingAllMethodsServlet {
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) 
             throws IOException {
+        log.info("PrefillAdaptiveFormServlet doGet method called");
         try {
             // Get the form path from request parameter
             String formPath = request.getParameter("formPath");

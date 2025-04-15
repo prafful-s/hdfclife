@@ -34,7 +34,7 @@ public class DatabaseConnectionService {
         String db_username() default "root";
         
         @AttributeDefinition(name = "Database Password", description = "MySQL database password")
-        String db_password() default "";
+        String db_password() default "Hdfclife@17";
     }
 
     @Activate

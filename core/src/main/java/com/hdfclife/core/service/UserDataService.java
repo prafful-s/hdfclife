@@ -20,15 +20,14 @@ public class UserDataService {
     @Reference
     private DatabaseConnectionService dbService;
 
-    public Map<String, String> getUserData(String userId) {
+    public Map<String, String> getUserData(String mobile) {
         Map<String, String> userData = new HashMap<>();
-        String query = "SELECT given_name, email, company, city, mobile, iban, swift_code " +
-                      "FROM user_profile WHERE user_id = ?";
+        String query = "SELECT given_name, email, company, city, mobile, iban, swift_code FROM user_profile WHERE mobile = ?";
 
         try (Connection conn = dbService.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            
-            stmt.setString(1, userId);
+            stmt.setString(1, mobile);
+            log.info("Query Statement: {}", stmt);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

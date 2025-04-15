@@ -3,10 +3,15 @@ package com.hdfclife.core.service;
 import com.adobe.forms.common.service.DataXMLOptions;
 import com.adobe.forms.common.service.DataXMLProvider;
 import com.adobe.forms.common.service.FormsException;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import javax.jcr.Session;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,7 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.util.Map;
 
-@Component
+@Component (service = DataXMLProvider.class, immediate = true)
 public class PrefillAdaptiveForm implements DataXMLProvider {
   private static final Logger log = LoggerFactory.getLogger(PrefillAdaptiveForm.class);
 
@@ -45,13 +50,11 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
   public InputStream getDataXMLForDataRef(DataXMLOptions dataXmlOptions) throws FormsException {
     log.info("HDFC Life Prefill service method called");
     InputStream xmlDataStream = null;
-    Resource aemFormContainer = dataXmlOptions.getFormResource();
-    ResourceResolver resolver = aemFormContainer.getResourceResolver();
-    Session session = (Session) resolver.adaptTo(Session.class);
     try {
 
       // Get user data from MySQL database
-      Map<String, String> userData = userDataService.getUserData(session.getUserID());
+      Map<String, String> userData = userDataService.getUserData("9876543210");
+      log.info("User data: {}", userData);
 
       // Get all required properties from the database
       // Get all required properties from userData map
@@ -62,6 +65,7 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
       String mobile = userData.get("mobile");
       String iban = userData.get("iban");
       String swiftCode = userData.get("swiftCode");
+      log.info("Given name: {}", givenName);
 
       DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -133,6 +137,8 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
       signerDetailElement.appendChild(signerNameElement);
       log.debug("Created signerName Element");
 
+      log.info("Document created successfully");
+
       // Transform the document to XML
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -141,14 +147,16 @@ public class PrefillAdaptiveForm implements DataXMLProvider {
       StreamResult outputTarget = new StreamResult(outputStream);
       transformer.transform(source, outputTarget);
 
+      log.info("Document transformed successfully");
+
       // Debug output if enabled
       if (log.isDebugEnabled()) {
         FileOutputStream output = new FileOutputStream("afdata.xml");
         StreamResult result = new StreamResult(output);
         transformer.transform(source, result);
       }
-
       xmlDataStream = new ByteArrayInputStream(outputStream.toByteArray());
+      log.info("XML data stream: {}", xmlDataStream.toString());
       return xmlDataStream;
     } catch (Exception e) {
       log.error("Error in prefill service: ", e);

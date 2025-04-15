@@ -574,6 +574,12 @@ Bundle-DocURL:
     <!-- ====================================================================== -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.27</version>
+                <scope>provided</scope>
+            </dependency>
             <!-- OSGi Dependencies -->
             <dependency>
                 <groupId>org.osgi</groupId>

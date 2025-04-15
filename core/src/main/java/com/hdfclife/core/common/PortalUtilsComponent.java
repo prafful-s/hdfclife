@@ -32,7 +32,7 @@ import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.SearchResult;
 
-@Component(service = PortalUtilsComponent.class)
+@Component(immediate = true)
 public class PortalUtilsComponent {
 
     private final Logger log = LoggerFactory.getLogger(PortalUtilsComponent.class);
@@ -43,8 +43,8 @@ public class PortalUtilsComponent {
     @Reference
     private UserManagementService usermgmtService;
 	
-	@Reference
-	ResourceResolverHelper resourceResolverHelper;
+		@Reference
+		ResourceResolverHelper resourceResolverHelper;
 	
     @Reference
     private SlingRepository repository = null;

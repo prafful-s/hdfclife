@@ -39,14 +39,16 @@ public class UserProfilePrefillService implements DataProvider {
 
     @Override
     public PrefillData getPrefillData(DataOptions options) throws FormsException {
-            // Create sample JSON data (replace this with actual data from userDataService)
         log.info("HDFC Life Prefill service method called");
         try {
-            String mobile = (String) options.getExtras().get("id");
-            log.info("Mobile number is : {}", mobile);
-            String mobileNumber = "9876543220"; // Replace with actual mobile number retrieval logic
+            log.info("Data options: {}", options.getExtras());
+            String mobileNumber = (String) options.getExtras().get("id");
+            log.info("Mobile number is : {}", mobileNumber);
+            //String mobileNumber = "9876543220"; // Replace with actual mobile number retrieval logic
             String userData = userDataService.getUserData(mobileNumber);
-            log.info("Retrieved user data: {}", userData);
+            if (userData == null || userData.isEmpty()) {
+                userData = "{}";
+            }
 
             // Create JSON structure directly from the userData map
             // The map already contains the correct structure from the database
@@ -81,7 +83,6 @@ public class UserProfilePrefillService implements DataProvider {
             // });
 
             // Convert to JSON string and create input stream
-            //String jsonString = objectMapper.writeValueAsString(rootNode);
             log.info("Generated JSON for prefill: {}", userData);
             InputStream inputStream = new ByteArrayInputStream(userData.getBytes());
             PrefillData prefillData = new PrefillData(inputStream, ContentType.JSON);

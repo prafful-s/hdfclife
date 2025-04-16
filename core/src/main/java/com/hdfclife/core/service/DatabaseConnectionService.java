@@ -28,13 +28,13 @@ public class DatabaseConnectionService {
     public @interface Config {
         
         @AttributeDefinition(name = "Database URL", description = "JDBC URL for MySQL database")
-        String db_url() default "jdbc:mysql://localhost:3306/hdfclife";
+        String db_url() default "jdbc:mysql://author623.adobedemo.com:3306/author623";
         
         @AttributeDefinition(name = "Database Username", description = "MySQL database username")
-        String db_username() default "root";
+        String db_username() default "developer";
         
         @AttributeDefinition(name = "Database Password", description = "MySQL database password")
-        String db_password() default "Hdfclife@17";
+        String db_password() default "rGwMel6gNY";
     }
 
     @Activate

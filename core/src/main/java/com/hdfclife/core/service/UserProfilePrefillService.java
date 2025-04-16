@@ -2,9 +2,7 @@ package com.hdfclife.core.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Map;
 
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
@@ -14,15 +12,11 @@ import com.adobe.forms.common.service.DataOptions;
 import com.adobe.forms.common.service.DataProvider;
 import com.adobe.forms.common.service.FormsException;
 import com.adobe.forms.common.service.PrefillData;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 @Component(immediate = true, service = {DataProvider.class})
 public class UserProfilePrefillService implements DataProvider {
     
     private static final Logger log = LoggerFactory.getLogger(UserProfilePrefillService.class);
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Reference
     private UserDataService userDataService;

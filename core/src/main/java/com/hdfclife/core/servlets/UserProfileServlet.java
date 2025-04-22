@@ -32,7 +32,7 @@ public class UserProfileServlet extends SlingAllMethodsServlet {
         try {
             // Read the JSON data from request body
             String jsonData = IOUtils.toString(request.getReader());
-            log.info("Received user profile data: {}", jsonData);
+            log.info("Received user profile data from the request: {}", jsonData);
 
             // Validate JSON structure
             ObjectNode jsonNode = (ObjectNode) objectMapper.readTree(jsonData);

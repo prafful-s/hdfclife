@@ -46,15 +46,17 @@ public class UserDataService {
         String upsertQuery = "INSERT INTO user_profile (mobileNumber, userProfileJson) " +
                            "VALUES (?, ?) " +
                            "ON DUPLICATE KEY UPDATE userProfileJson = ?";
+        log.info("Upsert query: {}", upsertQuery);
 
         try {
             // Parse JSON to extract mobile number
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode jsonNode = (ObjectNode) mapper.readTree(userProfileJson);
             String mobileNumber = jsonNode.get("mobileNumber").asText();
-
+            log.info("Mobile number from the user profile json: {}", mobileNumber);
             try (Connection conn = dbService.getConnection();
                  PreparedStatement stmt = conn.prepareStatement(upsertQuery)) {
+                log.info("DB connection successful");
                 
                 stmt.setString(1, mobileNumber);
                 stmt.setString(2, userProfileJson);

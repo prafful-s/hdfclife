@@ -118,13 +118,10 @@ definitions:
         properties:
           status:
             type: string
-            example: "Success"
           stausCode:
             type: string
-            example: "200"
           statusMsg:
             type: string
-            example: "OK"
           userid:
             type: string
           txnid:
@@ -140,6 +137,16 @@ definitions:
             type: string
           uwtype:
             type: string
+          qniproduct:
+            type: string
+          instype:
+            type: string
+          magnumbenefit:
+            type: string
+          minfactor:
+            type: string
+          mymixid:
+            type: string
           outputjsillustration:
             type: object
             properties:
@@ -147,19 +154,150 @@ definitions:
                 type: string
               premwodisc:
                 type: number
+              KTAX:
+                type: number
               totPremium:
+                type: number
+              threeMnthPrem:
+                type: number
+              prodname:
+                type: string
+              new_ill_chngs_eff_dt:
+                type: string
+              annPremium:
+                type: number
+              quoteid:
+                type: string
+              backdttax:
                 type: number
               sumAssured:
                 type: string
+              premium:
+                type: number
+              chMap:
+                type: string
+              GST_RT:
+                type: number
+              ST_RT:
+                type: number
+              saOnDeath:
+                type: number
+              uin:
+                type: string
+              id:
+                type: string
+              ResIndFlg:
+                type: boolean
+              twoMnthPrem:
+                type: number
+              appnum:
+                type: string
+              backdtpremium:
+                type: number
               POD:
                 type: object
                 properties:
-                  term:
+                  nextPremDDt:
+                    type: string
+                  gstrt_rop:
+                    type: string
+                  amr:
+                    type: string
+                  life_opt:
+                    type: string
+                  freq:
+                    type: string
+                  gstrt_nonrop:
+                    type: string
+                  pps_life_flg:
+                    type: string
+                  pps_flg:
+                    type: string
+                  gstrt_2yr:
                     type: string
                   sumAssured:
                     type: string
+                  rop:
+                    type: string
+                  spouse_name:
+                    type: string
+                  paymethod:
+                    type: string
+                  scb:
+                    type: string
+                  wopdis:
+                    type: string
+                  saf:
+                    type: string
+                  term:
+                    type: string
+                  adb:
+                    type: string
+                  suboption:
+                    type: string
+                  pps_mop_flg:
+                    type: string
+                  instapremium:
+                    type: number
+                  pla:
+                    type: string
+                  pps_life_pyrt:
+                    type: string
+                  dbi:
+                    type: string
+                  gstrt:
+                    type: string
+                  DeathSA:
+                    type: number
+                  ppt:
+                    type: string
+                  lifeStage:
+                    type: string
+                  agentname:
+                    type: string
+                  tobsts:
+                    type: string
+                  tagline:
+                    type: string
+                  topupOpt:
+                    type: string
                   option:
                     type: string
+                  wopCI:
+                    type: string
+              jnk:
+                type: string
+              qtDt:
+                type: string
+              incpDt:
+                type: string
+              mt_rt:
+                type: number
+              appTax:
+                type: number
+              EC_RT:
+                type: number
+              txBkDt:
+                type: number
+              nxtYrTax:
+                type: number
+              RD:
+                type: object
+                additionalProperties: true
+              bkdttax_rider:
+                type: number
+              premwor:
+                type: number
+              isservice:
+                type: string
+              firstriderPremium:
+                type: number
+              V10Flag:
+                type: boolean
+              partyid:
+                type: string
+              totAnnPremium:
+                type: number
 
   ErrorResponse:
     type: object
